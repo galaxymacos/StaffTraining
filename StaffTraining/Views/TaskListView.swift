@@ -15,27 +15,48 @@ struct TaskListViewModel {
 struct TaskListView: View {
     @State var viewModel: TaskListViewModel
     @State var showDetail = false
+    @State var searchText = ""
+    @State var showAddTaskView = false
     var body: some View {
-        List(viewModel.job.infos, id: \.title, children: \.content) { info in
-            if info.content != nil {
+        
+        List(searchText.isEmpty ? viewModel.job.infos : viewModel.job.infos.filter { $0.title.contains(searchText)}, id: \.title, children: \.detail) { info in
+            if info.detail != nil {
                 Label(info.title, systemImage: "quote.bubble")
                     .font(.headline)
-                    
+                
             }
             else {
                 Text(info.title)
                     .font(.system(size: 14))
             }
         }
-        .navigationTitle(viewModel.job.jobType.rawValue)
+        
+        .sheet(isPresented: $showAddTaskView, onDismiss: nil, content: {
+
+        })
+        .searchable(text: $searchText.animation())
+        .navigationTitle(viewModel.job.title.rawValue)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            Button {
+                showAddTaskView = true
+            } label: {
+                Label("Add Task", systemImage: "plus")
+            }
+            
+        }
+        
+        
+        
     }
 }
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            TaskListView(viewModel: .init(job: Job(jobType: .roomCleaner, infos: Info.exampleDatas[.roomCleaner]!)))
+            TaskListView(viewModel: .init(job: Job( id: "ff",title: .roomCleaner, infos: JobTask.exampleDatas[.roomCleaner]!)))
+            
         }
+        
     }
 }

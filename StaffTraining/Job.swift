@@ -6,19 +6,24 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseFirestoreSwift
+import FirebaseFirestore
 
 /// The struct contains a job and a list of infos he/she has to master
-struct Job: Codable, Identifiable, Hashable {
-    var id = UUID()
+struct Job: Identifiable, Decodable {
+    var id: String
     /// The type of job
-    var jobType: JobType
+    var title: JobTitle
     /// The list of information that the people having this job should know
-    var infos: [Info]
+    var infos: [JobTask]
 }
 
 extension Job {
     static var exampleData: [Job] = [
-        .init(jobType: .frontDeskManager, infos: Info.sampleTaskForCleaner),
-        .init(jobType: .roomCleaner, infos: Info.sampleTaskForCleaner),
+        .init(id: "fefe" ,title: .frontDeskManager, infos: JobTask.sampleTaskForCleaner),
+        .init(id: "fefef", title: .roomCleaner, infos: JobTask.sampleTaskForCleaner),
     ]
 }
+
+

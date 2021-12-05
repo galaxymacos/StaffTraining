@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum JobType: String, Codable {
+enum JobTitle: String, Codable {
     case roomCleaner = "Room Cleaner"
     case frontDeskManager = "Front Desk Manager"
 }
