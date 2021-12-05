@@ -8,7 +8,8 @@
 import Foundation
 
 /// The struct contains a job and a list of infos he/she has to master
-struct Job {
+struct Job: Codable, Identifiable, Hashable {
+    var id = UUID()
     /// The type of job
     var jobType: JobType
     /// The list of information that the people having this job should know

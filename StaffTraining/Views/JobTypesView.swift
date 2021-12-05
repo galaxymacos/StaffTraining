@@ -7,18 +7,27 @@
 
 import SwiftUI
 
-struct JobTypesViewModel {
-    var jobRequirement: Job
+struct JobsView {
+    var jobs: [Job]
 }
 
 struct JobTypesView: View {
+    @State var viewModel = JobsView(jobs: Job.exampleData)
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(viewModel.jobs) { job in
+            NavigationLink(job.jobType.rawValue) {
+                TaskListView(viewModel: .init(job: job))
+            }
+        }
+        .navigationTitle("Jobs")
+        
     }
 }
 
 struct JobTypesView_Previews: PreviewProvider {
     static var previews: some View {
-        JobTypesView()
+        NavigationView {
+            JobTypesView()
+        }
     }
 }
