@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-struct TaskListViewModel {
-    var job: Job
-    
-}
 
 struct TaskListView: View {
     @State var viewModel: TaskListViewModel
@@ -33,7 +29,7 @@ struct TaskListView: View {
         }
         
         .sheet(isPresented: $showAddTaskView, onDismiss: nil, content: {
-            AddTaskView(jobDocumentID: viewModel.job.id)
+            AddTaskView(taskListViewModel: $viewModel)
                 .environmentObject(dataController)
         })
         .searchable(text: $searchText.animation())

@@ -9,18 +9,11 @@ import SwiftUI
 
 struct AddTaskView: View {
     @State var title: String = ""
-    @State var detail: String = ""
-    @State var details: [String] = .init(repeating: "", count: 1)
-    @State var detailLevel: Int = 0
-    @State var jobDocumentID: String
+    @State var details: [String] = []
+    @Binding var taskListViewModel: TaskListViewModel
+    
     @EnvironmentObject var dataController: DataController
     @Environment(\.dismiss) var dismiss
-    
-    func save() {
-        let detailJobTask = details.map { JobTask(title: $0, detail: nil) }
-        let newJobTask = JobTask(title: title, detail: detailJobTask)
-        
-    }
     
     var body: some View {
         
@@ -39,48 +32,53 @@ struct AddTaskView: View {
                 
             }
             
+            if let details = details {
+                
+                ForEach(0..<details.count, id: \.self) { currentDetailLevel in
+                    HStack {
+                        Text("Task Detail")
+                            .frame(width: 100, alignment: .center)
+                            .padding(.leading)
+                        Spacer()
+                        TextField("Task Detail", text: $details[currentDetailLevel], prompt: nil)
+                            .textFieldStyle(.roundedBorder)
+                            .frame(width: 200)
+                            .padding(.trailing)
+                    }
+                    .transition(.slide)
+                }
+            }
             HStack {
                 Button("Add Detail") {
                     withAnimation {
-                        detailLevel += 1
-                        print("Detail level: \(detailLevel)")
+                            details.append("")
+                        
                     }
                 }
                 .padding(.leading, 50)
                 Spacer()
                 Button("Remove Detail") {
-                    if detailLevel > 0 {
+                    if details.count >= 1 {
                         withAnimation {
-                            detailLevel -= 1
+                            details.removeLast()
                         }
                     }
                 }
                 .padding(.trailing, 50)
             }
-            
-            ForEach(0..<detailLevel, id: \.self) { currentDetailLevel in
-                HStack {
-                    Text("Task Detail")
-                        .frame(width: 100, alignment: .center)
-                        .padding(.leading)
-                    Spacer()
-                    TextField("Task Detail", text: $details[currentDetailLevel], prompt: nil)
-                        .textFieldStyle(.roundedBorder)
-                        .frame(width: 200)
-                        .padding(.trailing)
-                }
-                .transition(.slide)
-            }
             Spacer()
             
             Button {
-                dataController.addTask(for: jobDocumentID, title: title, details: details)
+                dataController.addTask(for: taskListViewModel.job.id, title: title, details: details)
+                let jobTaskDetails = details.map { JobTask(title: $0, detail: nil) }
+                taskListViewModel.job.infos.append(.init(title: title, detail: jobTaskDetails))
                 dismiss()
             } label: {
                 Text("Save")
                     .font(.headline)
             }
             .buttonStyle(.borderedProminent)
+            .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
 
             
         }
@@ -90,6 +88,6 @@ struct AddTaskView: View {
 
 struct AddTaskView_Previews: PreviewProvider {
     static var previews: some View {
-        AddTaskView(jobDocumentID: "xx")
+        AddTaskView(taskListViewModel: .constant(TaskListViewModel(job: Job.exampleData[0])))
     }
 }
