@@ -12,6 +12,7 @@ import Firebase
 struct StaffTrainingApp: App {
     init() {
         FirebaseApp.configure()
+        print("Fire base app configured")
     }
     
     var body: some Scene {

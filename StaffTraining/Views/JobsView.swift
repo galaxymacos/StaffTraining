@@ -8,15 +8,15 @@
 import SwiftUI
 
 
-
-
 struct JobsView: View {
-    @ObservedObject var viewModel = JobsViewModel(jobs: Job.exampleData)
+    @EnvironmentObject var dataController: DataController
+    
     @State var searchText = ""
     var body: some View {
-        List(searchText.isEmpty ? viewModel.jobs : viewModel.jobs.filter { $0.title.rawValue.contains(searchText)}) { job in
+        List(searchText.isEmpty ? dataController.jobs : dataController.jobs.filter { $0.title.rawValue.contains(searchText)}) { job in
             NavigationLink(job.title.rawValue) {
                 TaskListView(viewModel: .init(job: job))
+                    .environmentObject(dataController)
             }
         }
         .searchable(text: $searchText.animation())
@@ -29,6 +29,7 @@ struct JobTypesView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             JobsView()
+                .environmentObject(DataController())
         }
     }
 }

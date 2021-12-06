@@ -22,6 +22,7 @@
 		2BAEC2F7275BFB1D0089E614 /* JobsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAEC2F6275BFB1D0089E614 /* JobsView.swift */; };
 		2BCDC296275D29D3006909E8 /* JobsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCDC295275D29D3006909E8 /* JobsViewModel.swift */; };
 		2BCDC29A275D559D006909E8 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCDC299275D559D006909E8 /* AddTaskView.swift */; };
+		2BCDC29C275D69B2006909E8 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCDC29B275D69B2006909E8 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		2BAEC2F6275BFB1D0089E614 /* JobsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsView.swift; sourceTree = "<group>"; };
 		2BCDC295275D29D3006909E8 /* JobsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsViewModel.swift; sourceTree = "<group>"; };
 		2BCDC299275D559D006909E8 /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
+		2BCDC29B275D69B2006909E8 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,8 @@
 		2BAEC2DC275B6AED0089E614 /* StaffTraining */ = {
 			isa = PBXGroup;
 			children = (
+				2BCDC295275D29D3006909E8 /* JobsViewModel.swift */,
+				2BCDC29B275D69B2006909E8 /* DataController.swift */,
 				2BAEC2F5275BF90C0089E614 /* Views */,
 				2BAEC2DD275B6AED0089E614 /* StaffTrainingApp.swift */,
 				2BAEC2EF275B6C0C0089E614 /* JobTask.swift */,
@@ -99,7 +103,6 @@
 				2BAEC2DF275B6AED0089E614 /* ContentView.swift */,
 				2BAEC2EB275B6B4A0089E614 /* TaskListView.swift */,
 				2BAEC2F6275BFB1D0089E614 /* JobsView.swift */,
-				2BCDC295275D29D3006909E8 /* JobsViewModel.swift */,
 				2BCDC299275D559D006909E8 /* AddTaskView.swift */,
 			);
 			path = Views;
@@ -189,6 +192,7 @@
 				2BAEC2E0275B6AED0089E614 /* ContentView.swift in Sources */,
 				2BCDC29A275D559D006909E8 /* AddTaskView.swift in Sources */,
 				2BAEC2F4275B74AA0089E614 /* Job.swift in Sources */,
+				2BCDC29C275D69B2006909E8 /* DataController.swift in Sources */,
 				2BAEC2F0275B6C0C0089E614 /* JobTask.swift in Sources */,
 				2BAEC2EC275B6B4A0089E614 /* TaskListView.swift in Sources */,
 				2BAEC2DE275B6AED0089E614 /* StaffTrainingApp.swift in Sources */,

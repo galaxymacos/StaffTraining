@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var dataController = DataController()
+    
     
     var body: some View {
         NavigationView {
             JobsView()
+                .environmentObject(dataController)
         }
     }
 }

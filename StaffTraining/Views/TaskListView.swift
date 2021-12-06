@@ -17,6 +17,7 @@ struct TaskListView: View {
     @State var showDetail = false
     @State var searchText = ""
     @State var showAddTaskView = false
+    @EnvironmentObject var dataController: DataController
     var body: some View {
         
         List(searchText.isEmpty ? viewModel.job.infos : viewModel.job.infos.filter { $0.title.contains(searchText)}, id: \.title, children: \.detail) { info in
@@ -32,7 +33,8 @@ struct TaskListView: View {
         }
         
         .sheet(isPresented: $showAddTaskView, onDismiss: nil, content: {
-
+            AddTaskView(jobDocumentID: viewModel.job.id)
+                .environmentObject(dataController)
         })
         .searchable(text: $searchText.animation())
         .navigationTitle(viewModel.job.title.rawValue)
