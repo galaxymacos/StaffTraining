@@ -11,6 +11,7 @@ struct AddTaskView: View {
     @State var title: String = ""
     @State var details: [String] = []
     @Binding var taskListViewModel: TaskListViewModel
+    @State var showUpdateFailureAlert = false
     
     @EnvironmentObject var dataController: DataController
     @Environment(\.dismiss) var dismiss
@@ -69,9 +70,20 @@ struct AddTaskView: View {
             Spacer()
             
             Button {
-                dataController.addTask(for: taskListViewModel.job.id, title: title, details: details)
-                let jobTaskDetails = details.map { JobTask(title: $0, detail: nil) }
-                taskListViewModel.job.infos.append(.init(title: title, detail: jobTaskDetails))
+                taskListViewModel.addTask(for: taskListViewModel.job.id, title: title, details: details) { error in
+                    if error == nil {
+                        DispatchQueue.main.async {
+                            withAnimation {
+                                let jobTaskDetails = details.map { JobTask(title: $0, detail: nil) }
+                                taskListViewModel.job.infos.append(.init(title: title, detail: jobTaskDetails))
+                            }
+                        }
+                    }
+                    else {
+                        showUpdateFailureAlert = true
+                    }
+                    
+                }
                 dismiss()
             } label: {
                 Text("Save")
@@ -79,6 +91,14 @@ struct AddTaskView: View {
             }
             .buttonStyle(.borderedProminent)
             .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
+            .alert("Update Failure - Cannot connect to database", isPresented: $showUpdateFailureAlert) {
+                Button {
+                    
+                } label: {
+                    Text("Dismiss")
+                }
+
+            }
 
             
         }

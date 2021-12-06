@@ -6,9 +6,35 @@
 //
 
 import Foundation
-
+import Firebase
 
 struct TaskListViewModel {
+    
+    enum TaskListError: Error {
+        case updateError
+    }
+    
     var job: Job
     
+    
+    mutating func addTask(for jobDocumentID: String, title: String, details: [String], completion: @escaping (Error?) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("Job/\(jobDocumentID)/Task").addDocument(data: ["title": title, "detail": details]) { error in
+            if error == nil {
+                
+//                DispatchQueue.main.async {
+//                    var jobUpdating = self.jobs.first(where: { $0.id == jobDocumentID})!
+//                    let jobTaskDetails = details.map { JobTask(title: $0, detail: nil) }
+//                    withAnimation {
+//                        jobUpdating.infos.append(.init(title: title, detail: [.init(title: title, detail: jobTaskDetails)]))
+//                    }
+//                    print("Updating the data")
+//                }
+                // TODO:
+                print("finish adding task")
+//                self.getData()
+            }
+            completion(error)
+        }
+    }
 }
