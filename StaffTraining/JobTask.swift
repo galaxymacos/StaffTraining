@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct JobTask: Codable, Hashable {
+struct JobTask: Codable,Identifiable, Hashable {
+    var id: String = UUID().uuidString
     var title: String
     var detail: [JobTask]?
 }

@@ -70,12 +70,14 @@ struct AddTaskView: View {
             Spacer()
             
             Button {
-                taskListViewModel.addTask(for: taskListViewModel.job.id, title: title, details: details) { error in
+                taskListViewModel.addTask(for: taskListViewModel.job.id, title: title, details: details) { (documentID, error) in
                     if error == nil {
                         DispatchQueue.main.async {
                             withAnimation {
+                                // TODO: Return the new documentID and instantiate it in the view
                                 let jobTaskDetails = details.map { JobTask(title: $0, detail: nil) }
-                                taskListViewModel.job.infos.append(.init(title: title, detail: jobTaskDetails))
+                                print("Create a new task with the document id: \(documentID)")
+                                taskListViewModel.job.jobTasks.append(.init(id: documentID, title: title, detail: jobTaskDetails))
                             }
                         }
                     }

@@ -16,13 +16,13 @@ struct Job: Identifiable, Decodable {
     /// The type of job
     var title: JobTitle
     /// The list of information that the people having this job should know
-    var infos: [JobTask]
+    var jobTasks: [JobTask]
 }
 
 extension Job {
     static var exampleData: [Job] = [
-        .init(id: "fefe" ,title: .frontDeskManager, infos: JobTask.sampleTaskForCleaner),
-        .init(id: "fefef", title: .roomCleaner, infos: JobTask.sampleTaskForCleaner),
+        .init(id: "fefe" ,title: .frontDeskManager, jobTasks: JobTask.sampleTaskForCleaner),
+        .init(id: "fefef", title: .roomCleaner, jobTasks: JobTask.sampleTaskForCleaner),
     ]
 }
 
