@@ -13,7 +13,30 @@ struct TaskListView: View {
     @State var showDetail = false
     @State var searchText = ""
     @State var showAddTaskView = false
+    @State var showDeleteAlert = false
+    @State var numberToDelete = ""
     @EnvironmentObject var dataController: DataController
+    
+   func deleleTask(taskID: String) {
+//        guard index >= 0, index < viewModel.job.jobTasks.count else {
+//            print("index out of bound - Stop deleing task")
+//            return
+//
+//        }
+        viewModel.deleteTask(for: viewModel.job.id, taskDocumentID: taskID) { error in
+            if error == nil {
+                withAnimation {
+                     viewModel.job.jobTasks.removeAll(where: { $0.id == taskID })
+                    }
+                print("Delete the task with the id: \(taskID)")
+                    
+            }
+            else {
+                print("Error occurs when deleting task with the id: \(taskID)")
+            }
+        }
+    }
+    
     var body: some View {
         
         List(searchText.isEmpty ? viewModel.job.jobTasks : viewModel.job.jobTasks.filter { $0.title.contains(searchText)}, id: \.title, children: \.detail) { jobTask in
@@ -21,37 +44,20 @@ struct TaskListView: View {
                 HStack {
                     Label(jobTask.title, systemImage: "quote.bubble")
                         .font(.headline)
-                    
-                    
+                    Spacer()
                 }
-                
+                .onTapGesture(count: 2) {
+                    print("Double click the job task with the id: \(jobTask.id)")
+                    deleleTask(taskID: jobTask.id)
+                }
             }
             else {
                 Text(jobTask.title)
                     .font(.system(size: 14))
+            
             }
             
         }
-        .onAppear(perform: {
-            // MARK: Remove the first task when the TaskListView load as testing purpose to replace swipe to delete
-//            print("Try delete the first document")
-//            viewModel.deleteTask(for: viewModel.job.id, taskDocumentID: viewModel.job.jobTasks[0].id) { error in
-//                if error == nil {
-//                    print("delete the task")
-////                    DispatchQueue.main.async {
-//                        withAnimation {
-//                            viewModel.job.jobTasks.removeFirst()
-//
-//                        }
-////                    }
-//
-//
-//                }
-//                else {
-//                    print("Error occurs when deleting an item")
-//                }
-//            }
-        })
         
         
         .sheet(isPresented: $showAddTaskView, onDismiss: nil, content: {
@@ -61,12 +67,22 @@ struct TaskListView: View {
         .searchable(text: $searchText.animation())
         .navigationTitle(viewModel.job.title.rawValue)
         .navigationBarTitleDisplayMode(.inline)
+        .textFieldAlert(isShowing: $showDeleteAlert, text: $numberToDelete, title: "Delete the number")
         .toolbar {
-            Button {
-                showAddTaskView = true
-            } label: {
-                Label("Add Task", systemImage: "plus")
+            HStack {
+                Button {
+                    showAddTaskView = true
+                } label: {
+                    Label("Add Task", systemImage: "plus")
+                }
+                
+                Button {
+                    showDeleteAlert = true
+                } label: {
+                    Label("Delete Task", systemImage: "trash")
+                }
             }
+            
             
         }
         

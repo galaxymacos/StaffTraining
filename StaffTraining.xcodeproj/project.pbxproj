@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B231163275E5218003028A0 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B231162275E5218003028A0 /* TextFieldAlert.swift */; };
 		2B81CD8B275CB4A1007C5E07 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B81CD8A275CB4A1007C5E07 /* GoogleService-Info.plist */; };
 		2B81CD8E275CB6FD007C5E07 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 2B81CD8D275CB6FD007C5E07 /* FirebaseDatabase */; };
 		2B81CD90275CB6FD007C5E07 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2B81CD8F275CB6FD007C5E07 /* FirebaseFirestore */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B231162275E5218003028A0 /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
 		2B81CD8A275CB4A1007C5E07 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2BAEC2DA275B6AED0089E614 /* StaffTraining.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StaffTraining.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BAEC2DD275B6AED0089E614 /* StaffTrainingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffTrainingApp.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 		2BAEC2D1275B6AED0089E614 = {
 			isa = PBXGroup;
 			children = (
+				2B231162275E5218003028A0 /* TextFieldAlert.swift */,
 				2BAEC2DC275B6AED0089E614 /* StaffTraining */,
 				2BAEC2DB275B6AED0089E614 /* Products */,
 			);
@@ -202,6 +205,7 @@
 				2BE2D073275DFEB10098EC28 /* TaskListViewModel.swift in Sources */,
 				2BAEC2F7275BFB1D0089E614 /* JobsView.swift in Sources */,
 				2BAEC2E0275B6AED0089E614 /* ContentView.swift in Sources */,
+				2B231163275E5218003028A0 /* TextFieldAlert.swift in Sources */,
 				2BCDC29A275D559D006909E8 /* AddTaskView.swift in Sources */,
 				2BAEC2F4275B74AA0089E614 /* Job.swift in Sources */,
 				2BCDC29C275D69B2006909E8 /* DataController.swift in Sources */,
