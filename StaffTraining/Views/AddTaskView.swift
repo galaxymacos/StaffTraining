@@ -60,7 +60,7 @@ struct AddTaskView: View {
                 Spacer()
                 Button("Remove Detail") {
                     if details.count >= 1 {
-                        withAnimation {
+                        _ = withAnimation {
                             details.removeLast()
                         }
                     }

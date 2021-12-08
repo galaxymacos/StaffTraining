@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            JobsView()
+            JobsView(jobsViewModel: .init())
                 .environmentObject(dataController)
         }
     }

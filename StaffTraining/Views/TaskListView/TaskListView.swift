@@ -18,11 +18,6 @@ struct TaskListView: View {
     @EnvironmentObject var dataController: DataController
     
    func deleleTask(taskID: String) {
-//        guard index >= 0, index < viewModel.job.jobTasks.count else {
-//            print("index out of bound - Stop deleing task")
-//            return
-//
-//        }
         viewModel.deleteTask(for: viewModel.job.id, taskDocumentID: taskID) { error in
             if error == nil {
                 withAnimation {
@@ -46,10 +41,16 @@ struct TaskListView: View {
                         .font(.headline)
                     Spacer()
                 }
-                .onTapGesture(count: 2) {
-                    print("Double click the job task with the id: \(jobTask.id)")
-                    deleleTask(taskID: jobTask.id)
-                }
+                .highPriorityGesture(
+                    TapGesture(count: 2)
+                        .onEnded({ _ in
+                            
+                                print("Double click the job task with the id: \(jobTask.id)")
+                                deleleTask(taskID: jobTask.id)
+                            
+                        })
+                
+                )
             }
             else {
                 Text(jobTask.title)
