@@ -14,7 +14,7 @@ struct JobsView: View {
     @EnvironmentObject var dataController: DataController
     @State var jobsViewModel: JobsViewModel
     
-    
+    @State var showAddJobView = false
     @State var searchText = ""
     
     func delete(at offset: IndexSet) {
@@ -24,8 +24,8 @@ struct JobsView: View {
     
     var body: some View {
         List {
-            ForEach(searchText.isEmpty ? dataController.jobs : dataController.jobs.filter { $0.title.rawValue.contains(searchText)}){ job in
-                NavigationLink(job.title.rawValue) {
+            ForEach(searchText.isEmpty ? dataController.jobs : dataController.jobs.filter { $0.title.contains(searchText)}){ job in
+                NavigationLink(job.title) {
                     TaskListView(viewModel: .init(job: job))
                         .environmentObject(dataController)
                 }
@@ -48,16 +48,25 @@ struct JobsView: View {
             }
         }
         .toolbar(content: {
-            HStack {
+            ToolbarItem(placement: .confirmationAction) {
                 Button {
-                    
+                    showAddJobView = true
                 } label: {
-                    Label("Add Job", systemImage: "plus")
+                    Label("Add", systemImage: "plus")
+                        .foregroundColor(.blue)
                 }
-                EditButton()
-                
+
             }
             
+            ToolbarItem(placement: .navigationBarLeading) {
+                EditButton()
+            }
+        })
+        .sheet(isPresented: $showAddJobView, content: {
+            NavigationView {
+                AddJobView()
+                
+            }
         })
         .searchable(text: $searchText.animation())
         .navigationTitle("Jobs")

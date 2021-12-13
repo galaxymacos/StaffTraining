@@ -66,7 +66,7 @@ struct TaskListView: View {
                 .environmentObject(dataController)
         })
         .searchable(text: $searchText.animation())
-        .navigationTitle(viewModel.job.title.rawValue)
+        .navigationTitle(viewModel.job.title)
         .navigationBarTitleDisplayMode(.inline)
         .textFieldAlert(isShowing: $showDeleteAlert, text: $numberToDelete, title: "Delete the number")
         .toolbar {
@@ -95,7 +95,7 @@ struct TaskListView: View {
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            TaskListView(viewModel: .init(job: Job( id: "ff",title: .roomCleaner, jobTasks: JobTask.exampleDatas[.roomCleaner]!)))
+            TaskListView(viewModel: .init(job: Job( id: "ff",title: "Room Cleaner", jobTasks: JobTask.exampleDatas["Room Cleaner"]!)))
             
         }
         

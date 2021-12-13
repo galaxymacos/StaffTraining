@@ -26,8 +26,8 @@ extension JobTask {
         .init(title: "When customer come in for both gas and products", detail: [.init(title: "Step 1: When the customer finishes pumping the gas, click the gas station button to add the price to the left side, and then when they come in and select the product they want, scan it to add the price of the product to the original gas price; Step 3: Let the user pay for it")])
     ]
     
-    static var exampleDatas: [JobTitle: [JobTask]] = [
-        .frontDeskManager : sampleTaskForFrontDesk,
-        .roomCleaner : sampleTaskForCleaner
+    static var exampleDatas: [String: [JobTask]] = [
+        "Front Desk Manager" : sampleTaskForFrontDesk,
+        "Room Cleaner" : sampleTaskForCleaner
     ]
 }
